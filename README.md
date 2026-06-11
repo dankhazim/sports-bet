@@ -25,7 +25,34 @@ packages/shared   – közös logika: pontszámítás, típusok (a későbbi mob
 supabase/         – SQL migrációk (séma, RLS, pontszámító függvény)
 ```
 
-## Üzembe helyezés
+## Lokális futtatás (Docker)
+
+Az app nem nyers Postgreshez csatlakozik, hanem a Supabase API-khoz, ezért a [docker-compose.yml](docker-compose.yml) a DB mellett a minimális Supabase stacket is elindítja: GoTrue (auth), PostgREST (REST API) és egy nginx gateway, ami mindezt a `http://localhost:8000` alá fésüli. Az app sémáját a `db-migrate` szolgáltatás automatikusan betölti az első indításkor, és lokálisan nincs e-mail-megerősítés.
+
+```bash
+docker compose up -d        # db + auth + rest + gateway (első indításkor séma-betöltéssel)
+pnpm install
+pnpm dev                    # az apps/web/.env.local már a lokális stackre mutat
+```
+
+Ezután <http://localhost:3000> alatt regisztrálhatsz és tippelhetsz. Hasznos parancsok:
+
+```bash
+docker compose ps           # állapot
+docker compose down         # leállítás (adatok megmaradnak)
+docker compose down -v      # teljes reset, minden lokális adat törlése
+psql postgres://supabase_admin:postgres@localhost:54322/postgres   # közvetlen DB-hozzáférés
+```
+
+A meccsek betöltéséhez lokálisan is kell egy [football-data.org token](https://www.football-data.org/client/register) az `apps/web/.env.local`-ba, utána:
+
+```bash
+curl -H "Authorization: Bearer local-dev-secret" http://localhost:3000/api/cron/sync-matches
+```
+
+> A lokális JWT kulcsok (anon/service) fixek és csak fejlesztésre valók — élesben a Supabase projekt saját kulcsait használd.
+
+## Üzembe helyezés (éles)
 
 ### 1. Supabase
 
@@ -37,12 +64,10 @@ supabase/         – SQL migrációk (séma, RLS, pontszámító függvény)
 
 Regisztrálj ingyenes API tokenért: <https://www.football-data.org/client/register>
 
-### 3. Lokális futtatás
+### 3. Env beállítás
 
 ```bash
-cp apps/web/.env.example apps/web/.env.local   # töltsd ki az értékeket
-pnpm install
-pnpm dev
+cp apps/web/.env.example apps/web/.env.local   # töltsd ki a Supabase projekt értékeivel
 ```
 
 Meccsek első betöltése (és bármikor kézi szinkron):
