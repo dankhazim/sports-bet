@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-pitch: #16a34a;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
