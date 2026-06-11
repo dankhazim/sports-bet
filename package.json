@@ -1,0 +1,10 @@
+{
+  "name": "sports-bet",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "test": "pnpm --filter @sports-bet/shared test"
+  },
+  "packageManager": "pnpm@10.33.0"
+}
