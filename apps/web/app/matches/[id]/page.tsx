@@ -50,7 +50,7 @@ export default async function MatchDetailPage({
   );
 
   return (
-    <main className="space-y-6">
+    <main className="mx-auto max-w-3xl space-y-6">
       <h1 className="text-2xl font-bold">Meccs</h1>
 
       <MatchCard match={match} tip={ownTip} linkToDetail={false} />

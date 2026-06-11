@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { isTippable, stageLabel } from '@sports-bet/shared';
+import { groupLabel, isTippable, stageLabel } from '@sports-bet/shared';
 import type { MatchWithTeams, Team, Tip } from '@/lib/types';
 import { formatKickoff } from '@/lib/format';
 import { TipForm } from './tip-form';
@@ -62,7 +62,7 @@ export function MatchCard({
   const header = (
     <div className="flex items-center justify-between text-xs text-zinc-500">
       <span>
-        {match.group_name ?? stageLabel(match.stage)}
+        {groupLabel(match.group_name) ?? stageLabel(match.stage)}
         {linkToDetail && ' ›'}
       </span>
       <StatusBadge match={match} />
@@ -70,10 +70,10 @@ export function MatchCard({
   );
 
   return (
-    <div className="rounded-xl bg-white p-3 shadow-sm">
+    <div className="flex h-full flex-col rounded-xl bg-white p-3 shadow-sm">
       {linkToDetail ? <Link href={`/matches/${match.id}`}>{header}</Link> : header}
 
-      <div className="mt-2 flex items-center gap-2">
+      <div className="my-2 flex items-center gap-2">
         <TeamLabel team={match.home_team} align="left" />
         <div className="min-w-14 text-center text-lg font-bold tabular-nums">
           {hasScore ? `${match.home_score} – ${match.away_score}` : '–'}
@@ -81,7 +81,7 @@ export function MatchCard({
         <TeamLabel team={match.away_team} align="right" />
       </div>
 
-      <div className="mt-2 border-t border-zinc-100 pt-2">
+      <div className="mt-auto border-t border-zinc-100 pt-2">
         {tippable ? (
           <TipForm
             matchId={match.id}

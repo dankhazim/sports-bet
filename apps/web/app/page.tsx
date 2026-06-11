@@ -39,39 +39,41 @@ export default async function DashboardPage() {
 
   return (
     <main className="space-y-6">
-      <h1 className="text-2xl font-bold">🏆 VB Tippelő</h1>
+      <h1 className="text-2xl font-bold md:hidden">🏆 VB Tippelő</h1>
 
-      <section className="space-y-2">
-        <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
-          Ranglista
-        </h2>
-        <LeaderboardTable
-          rows={(leaderboard ?? []) as LeaderboardRow[]}
-          currentUserId={user!.id}
-        />
-      </section>
-
-      <section className="space-y-2">
-        <div className="flex items-baseline justify-between">
+      <div className="space-y-6 md:grid md:grid-cols-5 md:items-start md:gap-8 md:space-y-0">
+        <section className="space-y-2 md:col-span-2">
           <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
-            Következő meccsek
+            Ranglista
           </h2>
-          <Link href="/matches" className="text-sm font-medium text-pitch">
-            Összes meccs →
-          </Link>
-        </div>
-        <div className="space-y-3">
-          {upcoming.map((match) => (
-            <MatchCard key={match.id} match={match} tip={tipByMatch.get(match.id)} />
-          ))}
-          {upcoming.length === 0 && (
-            <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm">
-              Nincs közelgő meccs. (Ha most állítottad be az appot, futtasd le a
-              meccs-szinkron cront!)
-            </p>
-          )}
-        </div>
-      </section>
+          <LeaderboardTable
+            rows={(leaderboard ?? []) as LeaderboardRow[]}
+            currentUserId={user!.id}
+          />
+        </section>
+
+        <section className="space-y-2 md:col-span-3">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
+              Következő meccsek
+            </h2>
+            <Link href="/matches" className="text-sm font-medium text-pitch">
+              Összes meccs →
+            </Link>
+          </div>
+          <div className="grid gap-3 xl:grid-cols-2">
+            {upcoming.map((match) => (
+              <MatchCard key={match.id} match={match} tip={tipByMatch.get(match.id)} />
+            ))}
+            {upcoming.length === 0 && (
+              <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm xl:col-span-2">
+                Nincs közelgő meccs. (Ha most állítottad be az appot, futtasd le a
+                meccs-szinkron cront!)
+              </p>
+            )}
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

@@ -51,14 +51,16 @@ export default async function MatchesPage() {
       )}
 
       {[...days.entries()].map(([key, dayMatches]) => (
-        <section key={key} id={`day-${key}`} className="scroll-mt-4 space-y-3">
+        <section key={key} id={`day-${key}`} className="scroll-mt-4 space-y-3 md:scroll-mt-20">
           <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
             {formatDay(dayMatches[0].kickoff_at)}
             {key === todayKey && ' · ma'}
           </h2>
-          {dayMatches.map((match) => (
-            <MatchCard key={match.id} match={match} tip={tipByMatch.get(match.id)} />
-          ))}
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {dayMatches.map((match) => (
+              <MatchCard key={match.id} match={match} tip={tipByMatch.get(match.id)} />
+            ))}
+          </div>
         </section>
       ))}
     </main>

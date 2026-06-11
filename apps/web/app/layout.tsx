@@ -22,8 +22,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="hu">
       <body className="min-h-screen bg-zinc-100 text-zinc-900 antialiased">
-        <div className="mx-auto max-w-lg px-3 pt-4 pb-24">{children}</div>
         {user && <NavBar />}
+        <div className="mx-auto w-full max-w-lg px-3 pt-4 pb-24 md:max-w-6xl md:px-8 md:pt-8 md:pb-12">
+          {children}
+        </div>
       </body>
     </html>
   );

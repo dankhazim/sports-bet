@@ -40,7 +40,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="flex min-h-[80vh] flex-col justify-center space-y-6">
+    <main className="mx-auto flex min-h-[80vh] w-full max-w-md flex-col justify-center space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold">🏆 VB Tippelő</h1>
         <p className="mt-1 text-sm text-zinc-500">Hozz létre egy fiókot</p>

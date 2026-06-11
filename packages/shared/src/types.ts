@@ -29,3 +29,10 @@ export function stageLabel(stage: string | null): string {
   if (!stage) return '';
   return STAGE_LABELS[stage] ?? stage;
 }
+
+/** "GROUP_A" → "A csoport" */
+export function groupLabel(group: string | null): string | null {
+  if (!group) return null;
+  const m = group.match(/^GROUP_([A-Z])$/);
+  return m ? `${m[1]} csoport` : group;
+}

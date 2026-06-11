@@ -31,18 +31,18 @@ export default async function MyTipsPage() {
     <main className="space-y-6">
       <h1 className="text-2xl font-bold">Tippjeim</h1>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3 md:max-w-md">
         <Stat label="Összpont" value={totalPoints} />
         <Stat label="Telitalálat" value={exactHits} />
         <Stat label="Leadott tipp" value={tips.length} />
       </div>
 
-      <div className="space-y-3">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {tips.map((tip) => (
           <MatchCard key={tip.id} match={tip.match} tip={tip} />
         ))}
         {tips.length === 0 && (
-          <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm">
+          <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm sm:col-span-2 xl:col-span-3">
             Még nem adtál le tippet — irány a meccsek oldal! ⚽
           </p>
         )}

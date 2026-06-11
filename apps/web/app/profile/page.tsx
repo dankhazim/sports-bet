@@ -14,7 +14,7 @@ export default async function ProfilePage() {
     .single();
 
   return (
-    <main className="space-y-6">
+    <main className="mx-auto max-w-xl space-y-6">
       <h1 className="text-2xl font-bold">Profil</h1>
 
       <section className="space-y-3 rounded-xl bg-white p-4 shadow-sm">
