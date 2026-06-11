@@ -118,6 +118,7 @@ $$;
 
 -- Csak a service role (cron) hívhatja
 revoke execute on function public.score_match(bigint) from public, anon, authenticated;
+grant execute on function public.score_match(bigint) to service_role;
 
 -- Admin/javítás célra: eredménykorrekció utáni újraszámítás
 create or replace function public.rescore_match(p_match_id bigint)
@@ -131,6 +132,7 @@ as $$
 $$;
 
 revoke execute on function public.rescore_match(bigint) from public, anon, authenticated;
+grant execute on function public.rescore_match(bigint) to service_role;
 
 -- =========================================================================
 -- Triggerek
@@ -163,7 +165,8 @@ returns trigger
 language plpgsql
 as $$
 begin
-  if coalesce(auth.role(), '') <> 'service_role' and current_user <> 'postgres' then
+  if coalesce(auth.role(), '') <> 'service_role'
+     and current_user not in ('postgres', 'supabase_admin') then
     if tg_op = 'INSERT' then
       new.points := null;
     else
