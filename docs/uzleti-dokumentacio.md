@@ -21,9 +21,10 @@ A termék lényege nem a fogadás, hanem a **közösségi élmény**: a baráti 
 1. Regisztrálsz, és máris tippelhetsz a vb összes hátralévő meccsére.
 2. Minden meccsre **pontos eredményt** tippelsz (rendes játékidő, kieséses szakaszban is).
 3. Tippelni és módosítani a **meccs kezdéséig** lehet; utána a tipp lezárul, és mindenki tippje láthatóvá válik.
-4. Pontozás:
-   - **3 pont** – pontos eredmény
-   - **2 pont** – jó kimenetel és jó gólkülönbség (eltalált, de nem pontos döntetlen is ide tartozik)
+4. Pontozás (meccsenként 0–5 pont szerezhető):
+   - **5 pont** – pontos végeredmény
+   - **3 pont** – jó kimenetel és jó gólkülönbség (eltalált, de nem pontos döntetlen is ide tartozik)
+   - **2 pont** – jó kimenetel és az egyik csapat gólszáma stimmel
    - **1 pont** – csak a kimenetel jó (győztes vagy döntetlen)
    - **0 pont** – rossz kimenetel
 5. A pontokat az app automatikusan számolja a meccs lefújása után pár percen belül.

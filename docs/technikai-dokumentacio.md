@@ -122,23 +122,25 @@ Csak a **rendes játékidő** (90 perc + hosszabbítási idő) eredményét tipp
 
 | Találat | Pont | Példa (tipp 2–1) |
 |---|---|---|
-| Pontos eredmény | **3** | eredmény 2–1 |
-| Gólkülönbség + kimenetel jó | **2** | eredmény 3–2 |
-| Csak a kimenetel jó (1X2) | **1** | eredmény 3–1 |
+| Pontos végeredmény | **5** | eredmény 2–1 |
+| Kimenetel + gólkülönbség jó | **3** | eredmény 3–2 |
+| Kimenetel jó + az egyik csapat gólszáma stimmel | **2** | eredmény 3–1 |
+| Csak a kimenetel jó (1X2) | **1** | eredmény 3–0 |
 | Rossz kimenetel | **0** | eredmény 1–1 vagy 0–1 |
 
-Döntetlen tippnél a jó kimenetel egyben jó gólkülönbség is (0), ezért az eltalált, de nem pontos döntetlen **2 pontot** ér (pl. tipp 1–1, eredmény 2–2).
+Döntetlen tippnél a jó kimenetel egyben jó gólkülönbség is (0), ezért az eltalált, de nem pontos döntetlen **3 pontot** ér (pl. tipp 1–1, eredmény 2–2).
 
 Holtverseny a ranglistán: 1. összpontszám, 2. több pontos találat, 3. több eltalált kimenetel, 4. korábbi regisztráció.
 
 ```ts
-function scoreTip(tip: Score, result: Score): 0 | 1 | 2 | 3 {
-  if (tip.home === result.home && tip.away === result.away) return 3;
+function scoreTip(tip: Score, result: Score): 0 | 1 | 2 | 3 | 5 {
+  if (tip.home === result.home && tip.away === result.away) return 5;
   const tipDiff = tip.home - tip.away;
   const resDiff = result.home - result.away;
-  if (tipDiff === resDiff) return 2;            // kimenetel + gólkülönbség
-  if (Math.sign(tipDiff) === Math.sign(resDiff)) return 1; // csak kimenetel
-  return 0;
+  if (Math.sign(tipDiff) !== Math.sign(resDiff)) return 0;  // rossz kimenetel
+  if (tipDiff === resDiff) return 3;                        // + gólkülönbség
+  if (tip.home === result.home || tip.away === result.away) return 2; // + egyik gólszám
+  return 1;                                                 // csak kimenetel
 }
 ```
 

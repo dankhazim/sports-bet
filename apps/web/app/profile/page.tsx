@@ -46,8 +46,9 @@ export default async function ProfilePage() {
       <section className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-sm">
         <h2 className="mb-2 font-semibold text-white">Pontozás 📋</h2>
         <ul className="space-y-1 text-zinc-400">
-          <li>🎯 Pontos eredmény: <strong className="text-zinc-100">3 pont</strong></li>
-          <li>📐 Jó kimenetel + gólkülönbség: <strong className="text-zinc-100">2 pont</strong></li>
+          <li>🎯 Pontos végeredmény: <strong className="text-zinc-100">5 pont</strong></li>
+          <li>📐 Jó kimenetel + gólkülönbség: <strong className="text-zinc-100">3 pont</strong></li>
+          <li>🔢 Jó kimenetel + az egyik csapat gólszáma: <strong className="text-zinc-100">2 pont</strong></li>
           <li>✅ Csak a kimenetel jó: <strong className="text-zinc-100">1 pont</strong></li>
           <li>❌ Rossz kimenetel: <strong className="text-zinc-100">0 pont</strong></li>
         </ul>
