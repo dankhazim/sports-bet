@@ -29,7 +29,7 @@ export function roundKeyOf(match: RoundSource): string {
 export function roundLabel(key: string): string {
   if (key.startsWith('md-')) {
     const n = Number(key.slice(3));
-    return n > 0 ? `${n}. forduló` : 'Csoportkör';
+    return n > 0 ? `${n}. kör` : 'Csoportkör';
   }
   return stageLabel(key) || 'Egyéb';
 }
