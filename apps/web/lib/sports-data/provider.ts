@@ -11,6 +11,7 @@ export interface ExternalMatch {
   externalId: string;
   stage: string | null;
   group: string | null;
+  matchday: number | null;
   kickoffAt: string;
   status: MatchStatus;
   homeTeam: ExternalTeam | null;

@@ -65,6 +65,7 @@ export async function syncMatches(admin: SupabaseClient) {
       away_team_id: m.awayTeam ? (teamIds.get(m.awayTeam.externalId) ?? null) : null,
       stage: m.stage,
       group_name: m.group,
+      matchday: m.matchday,
       kickoff_at: m.kickoffAt,
       status: m.status,
       home_score: m.homeScore,

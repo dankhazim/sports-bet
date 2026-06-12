@@ -15,8 +15,8 @@ export function isTippable(status: MatchStatus, kickoffAt: string | Date): boole
 
 export const STAGE_LABELS: Record<string, string> = {
   GROUP_STAGE: 'Csoportkör',
-  LAST_32: 'Nyolcaddöntőbe jutásért',
-  ROUND_OF_32: 'Nyolcaddöntőbe jutásért',
+  LAST_32: 'Tizenhatoddöntő',
+  ROUND_OF_32: 'Tizenhatoddöntő',
   LAST_16: 'Nyolcaddöntő',
   ROUND_OF_16: 'Nyolcaddöntő',
   QUARTER_FINALS: 'Negyeddöntő',

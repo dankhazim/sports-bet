@@ -27,6 +27,7 @@ interface FdMatch {
   status: string;
   stage: string | null;
   group: string | null;
+  matchday: number | null;
   homeTeam: FdTeam | null;
   awayTeam: FdTeam | null;
   score: {
@@ -100,6 +101,7 @@ export class FootballDataProvider implements SportsDataProvider {
         externalId: String(m.id),
         stage: m.stage,
         group: m.group,
+        matchday: m.matchday,
         kickoffAt: m.utcDate,
         status,
         homeTeam: mapTeam(m.homeTeam),
