@@ -83,7 +83,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/upda
 1. Pushold a repót GitHubra, és importáld Vercelbe, **Root Directory: `apps/web`**.
 2. Vidd fel az env változókat (lásd `.env.example`); `CRON_SECRET`-nek generálj erős véletlen értéket: `openssl rand -hex 32`.
 3. A napi meccs-szinkron cront a [apps/web/vercel.json](apps/web/vercel.json) definiálja (Hobby terven a napi gyakoriság a maximum). A `CRON_SECRET` env alapján a Vercel automatikusan a megfelelő `Authorization` fejléccel hívja.
-4. Az 5 percenkénti eredményfrissítést GitHub Actions hívja ([.github/workflows/update-results.yml](.github/workflows/update-results.yml)) — állítsd be a repo secreteket (*Settings → Secrets and variables → Actions*): `APP_URL` (a Vercel URL, pl. `https://vb-tippelo.vercel.app`) és `CRON_SECRET` (ugyanaz, mint a Vercelen).
+4. Az 5 percenkénti eredményfrissítést külső ütemező hívja (pl. [cron-job.org](https://cron-job.org)): GET `https://<app-url>/api/cron/update-results`, `Authorization: Bearer <CRON_SECRET>` fejléccel.
 5. Első induláskor töltsd be a meccseket:
    ```bash
    curl -H "Authorization: Bearer $CRON_SECRET" https://<app-url>/api/cron/sync-matches
