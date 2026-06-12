@@ -56,9 +56,10 @@ curl -H "Authorization: Bearer local-dev-secret" http://localhost:3000/api/cron/
 
 ### 1. Supabase
 
-1. Hozz létre projektet a [supabase.com](https://supabase.com)-on.
-2. SQL Editorban futtasd le a [supabase/migrations/0001_init.sql](supabase/migrations/0001_init.sql) tartalmát.
+1. Hozz létre projektet a [supabase.com](https://supabase.com)-on (region: EU, pl. Frankfurt).
+2. SQL Editorban futtasd le a `supabase/migrations/` fájljait **sorrendben** (0001 → 0002 → 0003). Alternatíva: `psql "<connection string>" -f <fájl>` egyenként.
 3. *Authentication → Sign In / Providers* alatt az Email provider legyen bekapcsolva. Baráti körhöz a leggyorsabb, ha a **"Confirm email" opciót kikapcsolod** (különben mindenkinek meg kell erősítenie az e-mail-címét).
+4. A kulcsok a *Project Settings → API* alatt: Project URL, `anon` (public) és `service_role` (secret) kulcs.
 
 ### 2. football-data.org
 
@@ -79,10 +80,14 @@ curl -H "Authorization: Bearer $CRON_SECRET" http://localhost:3000/api/cron/upda
 
 ### 4. Deploy (Vercel)
 
-1. Importáld a repót Vercelbe, **Root Directory: `apps/web`**.
-2. Vidd fel az env változókat (lásd `.env.example`).
-3. A napi meccs-szinkron cront a [apps/web/vercel.json](apps/web/vercel.json) definiálja (Hobby terven a napi gyakoriság a maximum).
-4. Az 5 percenkénti eredményfrissítést GitHub Actions hívja ([.github/workflows/update-results.yml](.github/workflows/update-results.yml)) — állítsd be a repo secreteket: `APP_URL` (a Vercel URL) és `CRON_SECRET`.
+1. Pushold a repót GitHubra, és importáld Vercelbe, **Root Directory: `apps/web`**.
+2. Vidd fel az env változókat (lásd `.env.example`); `CRON_SECRET`-nek generálj erős véletlen értéket: `openssl rand -hex 32`.
+3. A napi meccs-szinkron cront a [apps/web/vercel.json](apps/web/vercel.json) definiálja (Hobby terven a napi gyakoriság a maximum). A `CRON_SECRET` env alapján a Vercel automatikusan a megfelelő `Authorization` fejléccel hívja.
+4. Az 5 percenkénti eredményfrissítést GitHub Actions hívja ([.github/workflows/update-results.yml](.github/workflows/update-results.yml)) — állítsd be a repo secreteket (*Settings → Secrets and variables → Actions*): `APP_URL` (a Vercel URL, pl. `https://vb-tippelo.vercel.app`) és `CRON_SECRET` (ugyanaz, mint a Vercelen).
+5. Első induláskor töltsd be a meccseket:
+   ```bash
+   curl -H "Authorization: Bearer $CRON_SECRET" https://<app-url>/api/cron/sync-matches
+   ```
 
 ## Tesztek
 
