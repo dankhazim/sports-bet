@@ -83,15 +83,15 @@ export async function syncMatches(admin: SupabaseClient) {
  * external API-t meg sem hívja.
  */
 export async function updateResults(admin: SupabaseClient) {
-  const now = Date.now();
-  const windowStart = new Date(now - 6 * 60 * 60 * 1000).toISOString();
-  const windowEnd = new Date(now + 15 * 60 * 1000).toISOString();
+  const windowEnd = new Date(Date.now() + 15 * 60 * 1000).toISOString();
 
+  // Minden már elkezdődött (vagy 15 percen belül kezdődő), de még le nem zárt
+  // meccs frissítést igényel — szándékosan nincs alsó időkorlát, hogy egy
+  // cron-kimaradás után is bepótolja a lemaradt eredményeket.
   const { count: liveCount, error: liveError } = await admin
     .from('matches')
     .select('id', { count: 'exact', head: true })
     .in('status', ['SCHEDULED', 'TIMED', 'IN_PLAY', 'PAUSED'])
-    .gte('kickoff_at', windowStart)
     .lte('kickoff_at', windowEnd);
   if (liveError) throw liveError;
 
