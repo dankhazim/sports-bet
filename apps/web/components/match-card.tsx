@@ -16,11 +16,11 @@ function TeamLabel({ team, align }: { team: Team | null; align: 'left' | 'right'
         // eslint-disable-next-line @next/next/no-img-element
         <img src={team.crest_url} alt="" className="h-6 w-6 shrink-0 object-contain" />
       ) : (
-        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-zinc-200 text-xs">
+        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-zinc-800 text-xs text-zinc-500">
           ?
         </span>
       )}
-      <span className="text-sm leading-tight font-medium">
+      <span className="text-sm leading-tight font-medium text-zinc-100">
         {team?.name ?? 'Később derül ki'}
       </span>
     </div>
@@ -30,8 +30,8 @@ function TeamLabel({ team, align }: { team: Team | null; align: 'left' | 'right'
 function StatusBadge({ match }: { match: MatchWithTeams }) {
   if (match.status === 'IN_PLAY' || match.status === 'PAUSED') {
     return (
-      <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-600">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-600" /> ÉLŐ
+      <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-400">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-400" /> ÉLŐ
       </span>
     );
   }
@@ -39,12 +39,12 @@ function StatusBadge({ match }: { match: MatchWithTeams }) {
     return <span className="text-xs font-medium text-zinc-500">Vége</span>;
   }
   if (match.status === 'POSTPONED') {
-    return <span className="text-xs font-medium text-orange-600">Elhalasztva</span>;
+    return <span className="text-xs font-medium text-orange-400">Elhalasztva</span>;
   }
   if (match.status === 'CANCELLED') {
-    return <span className="text-xs font-medium text-red-600">Törölve</span>;
+    return <span className="text-xs font-medium text-red-400">Törölve</span>;
   }
-  return <span className="text-xs text-zinc-500">{formatKickoff(match.kickoff_at)}</span>;
+  return <span className="text-xs text-zinc-400">{formatKickoff(match.kickoff_at)}</span>;
 }
 
 export function MatchCard({
@@ -70,18 +70,18 @@ export function MatchCard({
   );
 
   return (
-    <div className="flex h-full flex-col rounded-xl bg-white p-3 shadow-sm">
+    <div className="flex h-full flex-col rounded-2xl border border-zinc-800 bg-zinc-900/70 p-3 transition-colors hover:border-zinc-700">
       {linkToDetail ? <Link href={`/matches/${match.id}`}>{header}</Link> : header}
 
       <div className="my-2 flex items-center gap-2">
         <TeamLabel team={match.home_team} align="left" />
-        <div className="min-w-14 text-center text-lg font-bold tabular-nums">
+        <div className="min-w-14 text-center text-lg font-bold tabular-nums text-white">
           {hasScore ? `${match.home_score} – ${match.away_score}` : '–'}
         </div>
         <TeamLabel team={match.away_team} align="right" />
       </div>
 
-      <div className="mt-auto border-t border-zinc-100 pt-2">
+      <div className="mt-auto border-t border-zinc-800/80 pt-2">
         {tippable ? (
           <TipForm
             matchId={match.id}
@@ -89,14 +89,17 @@ export function MatchCard({
             initialAway={tip?.away_score ?? null}
           />
         ) : tip ? (
-          <div className="flex items-center justify-center gap-2 text-sm text-zinc-600">
+          <div className="flex items-center justify-center gap-2 text-sm text-zinc-400">
             <span>
-              Tipped: <strong>{tip.home_score} – {tip.away_score}</strong>
+              Tipped:{' '}
+              <strong className="text-zinc-100">
+                {tip.home_score} – {tip.away_score}
+              </strong>
             </span>
             <PointsBadge points={tip.points} />
           </div>
         ) : (
-          <p className="text-center text-xs text-zinc-400">Nem adtál le tippet</p>
+          <p className="text-center text-xs text-zinc-600">Nem adtál le tippet</p>
         )}
       </div>
     </div>

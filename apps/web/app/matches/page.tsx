@@ -36,7 +36,7 @@ export default async function MatchesPage() {
   return (
     <main className="space-y-6">
       <div className="flex items-baseline justify-between">
-        <h1 className="text-2xl font-bold">Meccsek</h1>
+        <h1 className="text-2xl font-bold text-white">Meccsek</h1>
         {days.has(todayKey) && (
           <a href={`#day-${todayKey}`} className="text-sm font-medium text-pitch">
             Ugrás a mai naphoz ↓
@@ -45,14 +45,14 @@ export default async function MatchesPage() {
       </div>
 
       {matches.length === 0 && (
-        <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm">
+        <p className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-center text-sm text-zinc-500">
           Még nincsenek betöltve a meccsek — futtasd le a meccs-szinkron cront.
         </p>
       )}
 
       {[...days.entries()].map(([key, dayMatches]) => (
         <section key={key} id={`day-${key}`} className="scroll-mt-4 space-y-3 md:scroll-mt-20">
-          <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
+          <h2 className="text-xs font-semibold tracking-wider text-zinc-500 uppercase">
             {formatDay(dayMatches[0].kickoff_at)}
             {key === todayKey && ' · ma'}
           </h2>

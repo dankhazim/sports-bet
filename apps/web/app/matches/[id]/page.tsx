@@ -51,31 +51,31 @@ export default async function MatchDetailPage({
 
   return (
     <main className="mx-auto max-w-3xl space-y-6">
-      <h1 className="text-2xl font-bold">Meccs</h1>
+      <h1 className="text-2xl font-bold text-white">Meccs</h1>
 
       <MatchCard match={match} tip={ownTip} linkToDetail={false} />
 
       <section className="space-y-2">
-        <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
+        <h2 className="text-xs font-semibold tracking-wider text-zinc-500 uppercase">
           Tippek
         </h2>
         {kickoffPassed ? (
-          <div className="overflow-hidden rounded-xl bg-white shadow-sm">
+          <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/70">
             {otherTips.map((tip) => (
               <div
                 key={tip.id}
-                className={`flex items-center justify-between border-b border-zinc-50 px-3 py-2.5 last:border-0 ${
-                  tip.user_id === user!.id ? 'bg-green-50' : ''
+                className={`flex items-center justify-between border-b border-zinc-800/60 px-3 py-2.5 last:border-0 ${
+                  tip.user_id === user!.id ? 'bg-emerald-500/10' : ''
                 }`}
               >
-                <span className="text-sm font-medium">
+                <span className="text-sm font-medium text-zinc-100">
                   {tip.profile?.display_name ?? 'Ismeretlen'}
                   {tip.user_id === user!.id && (
                     <span className="ml-1 text-xs font-normal text-pitch">(te)</span>
                   )}
                 </span>
                 <span className="flex items-center gap-2 text-sm">
-                  <strong className="tabular-nums">
+                  <strong className="tabular-nums text-white">
                     {tip.home_score} – {tip.away_score}
                   </strong>
                   <PointsBadge points={tip.points} />
@@ -83,13 +83,13 @@ export default async function MatchDetailPage({
               </div>
             ))}
             {otherTips.length === 0 && (
-              <p className="px-3 py-6 text-center text-sm text-zinc-400">
+              <p className="px-3 py-6 text-center text-sm text-zinc-500">
                 Erre a meccsre senki nem tippelt.
               </p>
             )}
           </div>
         ) : (
-          <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm">
+          <p className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-center text-sm text-zinc-500">
             A többiek tippje a meccs kezdetekor válik láthatóvá. 🤫
           </p>
         )}

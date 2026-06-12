@@ -1,9 +1,21 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-pitch: #16a34a;
+  --color-pitch: #34d399; /* emerald-400 — kiemelések, linkek */
+  --color-pitch-strong: #10b981; /* emerald-500 — gombok */
+}
+
+html {
+  color-scheme: dark;
 }
 
 body {
   -webkit-tap-highlight-color: transparent;
+  background-color: #09090b; /* zinc-950 */
+  background-image: radial-gradient(
+    50rem 24rem at 50% -8rem,
+    rgba(16, 185, 129, 0.14),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
 }

@@ -1,8 +1,8 @@
 const STYLES: Record<number, string> = {
-  3: 'bg-green-600 text-white',
-  2: 'bg-lime-500 text-white',
-  1: 'bg-amber-400 text-zinc-900',
-  0: 'bg-zinc-200 text-zinc-500',
+  3: 'bg-emerald-400 text-zinc-950',
+  2: 'bg-lime-400 text-zinc-950',
+  1: 'bg-amber-400 text-zinc-950',
+  0: 'bg-zinc-800 text-zinc-500',
 };
 
 export function PointsBadge({ points }: { points: number | null }) {

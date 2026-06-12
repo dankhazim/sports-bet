@@ -39,11 +39,11 @@ export default async function DashboardPage() {
 
   return (
     <main className="space-y-6">
-      <h1 className="text-2xl font-bold md:hidden">🏆 VB Tippelő</h1>
+      <h1 className="text-2xl font-bold text-white md:hidden">⚽ VB Tippelő</h1>
 
       <div className="space-y-6 md:grid md:grid-cols-5 md:items-start md:gap-8 md:space-y-0">
         <section className="space-y-2 md:col-span-2">
-          <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
+          <h2 className="text-xs font-semibold tracking-wider text-zinc-500 uppercase">
             Ranglista
           </h2>
           <LeaderboardTable
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
 
         <section className="space-y-2 md:col-span-3">
           <div className="flex items-baseline justify-between">
-            <h2 className="text-sm font-semibold tracking-wide text-zinc-500 uppercase">
+            <h2 className="text-xs font-semibold tracking-wider text-zinc-500 uppercase">
               Következő meccsek
             </h2>
             <Link href="/matches" className="text-sm font-medium text-pitch">
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
               <MatchCard key={match.id} match={match} tip={tipByMatch.get(match.id)} />
             ))}
             {upcoming.length === 0 && (
-              <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm xl:col-span-2">
+              <p className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-center text-sm text-zinc-500 xl:col-span-2">
                 Nincs közelgő meccs. (Ha most állítottad be az appot, futtasd le a
                 meccs-szinkron cront!)
               </p>

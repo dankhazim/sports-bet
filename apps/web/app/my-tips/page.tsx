@@ -29,7 +29,7 @@ export default async function MyTipsPage() {
 
   return (
     <main className="space-y-6">
-      <h1 className="text-2xl font-bold">Tippjeim</h1>
+      <h1 className="text-2xl font-bold text-white">Tippjeim</h1>
 
       <div className="grid grid-cols-3 gap-3 md:max-w-md">
         <Stat label="Összpont" value={totalPoints} />
@@ -42,7 +42,7 @@ export default async function MyTipsPage() {
           <MatchCard key={tip.id} match={tip.match} tip={tip} />
         ))}
         {tips.length === 0 && (
-          <p className="rounded-xl bg-white p-4 text-center text-sm text-zinc-400 shadow-sm sm:col-span-2 xl:col-span-3">
+          <p className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-center text-sm text-zinc-500 sm:col-span-2 xl:col-span-3">
             Még nem adtál le tippet — irány a meccsek oldal! ⚽
           </p>
         )}
@@ -53,8 +53,8 @@ export default async function MyTipsPage() {
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-xl bg-white p-3 text-center shadow-sm">
-      <div className="text-2xl font-bold tabular-nums">{value}</div>
+    <div className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-3 text-center">
+      <div className="text-2xl font-bold tabular-nums text-white">{value}</div>
       <div className="text-xs text-zinc-500">{label}</div>
     </div>
   );

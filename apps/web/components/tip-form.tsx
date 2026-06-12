@@ -33,7 +33,7 @@ export function TipForm({ matchId, initialHome, initialAway }: Props) {
   }
 
   const inputClass =
-    'h-10 w-12 rounded-lg border border-zinc-300 bg-white text-center text-base font-semibold focus:border-pitch focus:outline-none';
+    'h-10 w-12 rounded-xl border border-zinc-700 bg-zinc-800/80 text-center text-base font-semibold text-white focus:border-pitch focus:ring-1 focus:ring-pitch/40 focus:outline-none';
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center gap-1">
@@ -48,7 +48,7 @@ export function TipForm({ matchId, initialHome, initialAway }: Props) {
           aria-label="Hazai gólok"
           className={inputClass}
         />
-        <span className="text-zinc-400">–</span>
+        <span className="text-zinc-600">–</span>
         <input
           type="number"
           inputMode="numeric"
@@ -62,12 +62,12 @@ export function TipForm({ matchId, initialHome, initialAway }: Props) {
         <button
           type="submit"
           disabled={!canSave}
-          className="h-10 rounded-lg bg-pitch px-3 text-sm font-semibold text-white disabled:opacity-40"
+          className="h-10 rounded-xl bg-pitch-strong px-3.5 text-sm font-bold text-zinc-950 transition-colors hover:bg-pitch disabled:opacity-40"
         >
           {pending ? '…' : saved ? '✓' : 'Tipp'}
         </button>
       </div>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-red-400">{error}</p>}
     </form>
   );
 }
